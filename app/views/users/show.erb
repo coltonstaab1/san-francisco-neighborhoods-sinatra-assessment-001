@@ -1,1 +1,10 @@
-<h1>Welcome to <%=@user.first_name %>'s page</h1>
+<% if @user == @current_user %>
+    <h2>Welcome to your page<h2>
+<% else %>
+  <h2><%= "Welcome to #{@user.first_name} #{@user.last_name}'s page" %></h2>
+<% end %>
+
+<% if @user.neighborhood %>
+<p><%= "Neighborhood: #{@user.neighborhood.name}" %></p>
+<% end %>
+<p><%= "Email address: #{@user.email}" %></p>

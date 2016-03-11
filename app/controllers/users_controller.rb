@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	get '/signup' do
-		erb :'users/new'
+		erb :'users/new', layout: false
 	end
 
 	post '/signup' do
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
 	get '/login' do
 		if !session[:user_id]
-			erb :'users/login'
+			erb :'users/login', layout: false
 		else
 			redirect '/'
 		end
@@ -31,20 +31,13 @@ class UsersController < ApplicationController
 			redirect to '/signup'
 		end
 	end
-=begin
-	get '/logout'
-		if session[:user_id] != nil
-			session.destroy
-		end
-			redirect to '/'
-	end
-=end
+
 	get '/users/:id' do
 		if !logged_in?
 			redirect to '/login'
 		end
-
 		@user = User.find(params[:id])
+		@current_user = current_user
 		erb :'users/show'
 	end
 
@@ -55,6 +48,13 @@ class UsersController < ApplicationController
 			@users = User.all
 			erb :'users/index'
 		end
+	end
+
+	get '/logout' do
+		if logged_in?
+			session.destroy
+		end
+		redirect to '/'
 	end
 
 end

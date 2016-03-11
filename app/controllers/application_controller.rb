@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
 
 	get '/' do
 		if !logged_in?
-			erb :index
+			erb :index, layout: false
 		else
 			redirect to '/users'
 		end

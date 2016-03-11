@@ -1,6 +1,6 @@
 require './config/environment'
 
 use UsersController
-#use LandmarksController
-#use NeighborhoodsController
+use LandmarksController
+use NeighborhoodsController
 run ApplicationController
