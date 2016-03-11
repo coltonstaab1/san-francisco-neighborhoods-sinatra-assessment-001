@@ -7,4 +7,13 @@ class NeighborhoodsController < ApplicationController
     end
   end
 
+  get '/neighborhoods/:id' do
+    @neighborhood =  Neighborhood.find(params[:id])
+    erb :"/neighborhoods/show"
+  end
+
+  get '/neighborhoods/new' do
+    redirect_if_not_logged_in
+  end
+
 end

@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 		user = User.find_by(email: params[:email])
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
-			redirect to '/users/#{user.id}'
+			redirect to "/users/#{user.id}"
 		else
 			redirect to '/signup'
 		end
@@ -55,6 +55,23 @@ class UsersController < ApplicationController
 			session.destroy
 		end
 		redirect to '/'
+	end
+
+	get '/users/:id/edit' do 
+		if !logged_in? || session[:user_id] != params[:id].to_i
+			@error_message = "Cannot edit another user's information"
+			redirect to "/users"
+		else
+			@user = User.find(params[:id])
+			@neighborhoods = Neighborhood.all
+			erb :'users/edit'
+		end
+	end
+
+	post '/users/:id' do 
+		@user = User.find(params[:id])
+		@user.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], neighborhood_id: params[:neighborhood_id])
+		redirect to "/users/#{@user.id}"
 	end
 
 end

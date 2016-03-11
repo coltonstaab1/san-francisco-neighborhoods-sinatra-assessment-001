@@ -1,0 +1,22 @@
+<h2>Edit your profile:</h2>
+<form action='/users/<%=@user.id%>' method='POST'>
+  <label>First name:</label>
+  <input type="text" name="first_name" value="<%=@user.first_name%>"><br>
+
+  <label>Last name:</label>
+  <input type="text" name="last_name" value="<%=@user.last_name%>"><br>
+  
+  <label>Email address:</label>
+  <input type="email" name="email" value="<%=@user.email%>"><br>
+
+  <label>Neighborhood:</label>
+  <select name="neighborhood_id">
+    <% @neighborhoods.all.each do |neighborhood| %>
+      <option value=<%= neighborhood.id %> <%= "selected" if neighborhood.id==@user.neighborhood_id %>><%= neighborhood.name %></option>
+    <% end %>
+  </select><br>
+
+  <input type="submit" value="Update">
+
+</form>
+<br>

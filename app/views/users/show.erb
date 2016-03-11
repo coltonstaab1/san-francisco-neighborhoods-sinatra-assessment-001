@@ -1,10 +1,10 @@
 <% if @user == @current_user %>
-    <h2>Welcome to your page<h2>
+    <h2>Welcome to your page (<a href ='/users/<%=@user.id%>/edit'>edit</a>)<h2>
 <% else %>
   <h2><%= "Welcome to #{@user.first_name} #{@user.last_name}'s page" %></h2>
 <% end %>
 
 <% if @user.neighborhood %>
-<p><%= "Neighborhood: #{@user.neighborhood.name}" %></p>
+  <p>Neighborhood: <a href='/neighborhoods/<%= @user.neighborhood.id %>'><%= @user.neighborhood.name %></a></p>
 <% end %>
 <p><%= "Email address: #{@user.email}" %></p>

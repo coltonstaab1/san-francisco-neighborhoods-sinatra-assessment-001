@@ -1,5 +1,6 @@
-<h2>Neighborhoods</h2>
+<h2>Neighborhoods </h2>
+<h3><a href='/neighborhoods/new'>(create new neighborhood)</a></h3>
 <% @neighborhoods.each do |neighborhood| %>
-  <li><%= neighborhood.name %></li>
+  <li><a href="/neighborhoods/<%=neighborhood.id%>"><%= neighborhood.name %></a></li>
 <% end %>
 <br>
