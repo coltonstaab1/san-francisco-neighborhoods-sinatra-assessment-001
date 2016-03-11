@@ -31,7 +31,14 @@ class UsersController < ApplicationController
 			redirect to '/signup'
 		end
 	end
-
+=begin
+	get '/logout'
+		if session[:user_id] != nil
+			session.destroy
+		end
+			redirect to '/'
+	end
+=end
 	get '/users/:id' do
 		if !logged_in?
 			redirect to '/login'
@@ -46,7 +53,6 @@ class UsersController < ApplicationController
 			redirect to '/login'
 		else
 			@users = User.all
-			binding.pry
 			erb :'users/index'
 		end
 	end

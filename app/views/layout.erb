@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>San Francisco Neighborhood Guide</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>San Francisco Neighborhood Guide</h1>
+      <% if !@error_message.nil? %>
+      <div class="alert alert-warning">
+        <%= @error_message %>
+      </div>
+    <% end %>
+      <%= yield %> 
+    </div>
+    <nav>
+      <% if logged_in? %>
+        <a href="/logout"> Log Out </a>
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login"> Sign In </a>
+      <%end %>
+    </nav>
+  </body>
+</html>
