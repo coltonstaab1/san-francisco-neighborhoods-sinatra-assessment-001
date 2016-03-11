@@ -15,6 +15,7 @@ class NeighborhoodsController < ApplicationController
 
   get '/neighborhoods/:id' do
     @neighborhood =  Neighborhood.find(params[:id])
+    @user_id = session[:user_id].to_i
     erb :"/neighborhoods/show"
   end
 
@@ -23,5 +24,14 @@ class NeighborhoodsController < ApplicationController
     redirect  '/neighborhoods'
   end
 
+  get '/neighborhoods/:id/edit' do 
+    redirect_if_not_logged_in
+    @neighborhood = Neighborhood.find(params[:id])
+    if @neighborhood.created_by != session[:user_id]
+      redirect to '/neighborhoods'
+    else
+      erb :'/neighborhoods/edit'
+    end
+  end
 
 end

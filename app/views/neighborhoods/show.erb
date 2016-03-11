@@ -1,4 +1,8 @@
-<h2><%= "Welcome to the #{@neighborhood.name} page" %></h2>
+<h2><%= "Welcome to the #{@neighborhood.name} page" %>
+<% if @user_id == @neighborhood.created_by%>
+  <a href="/neighborhoods/<%=@neighborhood.id%>/edit">(edit)</a>
+<% end %>
+</h2>
 <h3>Neighborhood facts:</h3>
 <ul>
   <li><%= "Year founded: #{@neighborhood.year_founded}" %></li>
