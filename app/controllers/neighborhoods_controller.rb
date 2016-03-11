@@ -34,4 +34,10 @@ class NeighborhoodsController < ApplicationController
     end
   end
 
+  post '/neighborhoods/:id' do
+    @neighborhood = Neighborhood.find(params[:id])
+    @neighborhood.update(name: params[:name], number_inhabitants: params[:number_inhabitants], year_founded: params[:year_founded], created_by: params[:created_by])
+    redirect to "/neighborhoods/#{@neighborhood.id}"
+  end
+
 end

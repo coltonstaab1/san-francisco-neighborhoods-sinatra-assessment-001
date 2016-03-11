@@ -1,1 +1,17 @@
-<h2>Editing stuff, woo!</h2>
+<h2>Editing <%=@neighborhood.name%>:</h2>
+<form action='/neighborhoods/<%=@neighborhood.id%>' method='POST'>
+  <label>Name:</label>
+  <input type="text" name="name" value="<%=@neighborhood.name%>"><br>
+
+  <label>Year founded:</label>
+  <input type="number" name="year_founded" value="<%=@neighborhood.year_founded%>"><br>
+
+  <label>Population:</label>
+  <input type="number" name="number_inhabitants" value="<%=@neighborhood.number_inhabitants%>"><br>
+
+  <input type="hidden" name="created_by" value="<%=@neighborhood.created_by%>">
+
+  <input type="submit" value="Edit">
+
+</form>
+<br>
