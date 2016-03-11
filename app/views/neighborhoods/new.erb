@@ -1,0 +1,20 @@
+<h2>Create a new San Francisco neighborhood:</h2>
+
+<form action="/neighborhoods" method="POST">
+
+  <label>Name:</label>
+  <input type="text" name="name"><br>
+
+
+  <label>Year founded:</label>
+  <input type="number" name="year_founded"><br>
+
+  <label>Population:</label>
+  <input type="number" name="number_inhabitants"><br>
+
+  <input type="hidden" name="created_by" value="<%=@user.id%>">
+
+  <input type="submit" value="Create">
+
+</form>
+<br>
