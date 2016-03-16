@@ -1,6 +1,6 @@
 <h2>Create a new San Francisco landmark:</h2>
 
-<form action="/neighborhoods" method="POST">
+<form action="/landmarks" method="POST">
 
   <label>Name:</label>
   <input type="text" name="name"><br>
@@ -20,7 +20,7 @@
   <label>Neighborhood:</label>
   <select name="neighborhood_id">
     <% @neighborhoods.all.each do |neighborhood| %>
-      <option value=<%= neighborhood.id %><%= neighborhood.name %></option>
+      <option value=<%= neighborhood.id %>><%= neighborhood.name %></option>
     <% end %>
   </select><br>
 

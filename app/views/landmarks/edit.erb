@@ -1,0 +1,29 @@
+<h2>Edit <%=@landmark.name %>:</h2>
+
+<form action="/landmarks/<%=@landmark.id%>" method="POST">
+
+  <label>Name:</label>
+  <input type="text" name="name" value="<%=@landmark.name%>"><br>
+
+  <label>Address:</label>
+  <input type="text" name="address" value="<%=@landmark.address%>"><br>
+
+  <label>Landmark Type:</label>
+  <select name="landmark_type">
+    <option value="bar" <%="selected" if @landmark.landmark_type =="bar"%>>Bar</option>
+    <option value="gym" <%="selected" if @landmark.landmark_type =="gym"%>>Gym</option>
+    <option value="movie_theater" <%="selected" if @landmark.landmark_type =="movie_theater"%>>Movie Theater</option>
+    <option value="restaurant" <%="selected" if @landmark.landmark_type =="restaurant"%>>Restaurant</option>
+  </select><br>
+
+  <label>Neighborhood:</label>
+  <select name="neighborhood_id">
+    <% @neighborhoods.all.each do |neighborhood| %>
+      <option value=<%= neighborhood.id %>><%= neighborhood.name %></option>
+    <% end %>
+  </select><br>
+
+  <input type="submit" value="Create">
+
+</form>
+<br>
