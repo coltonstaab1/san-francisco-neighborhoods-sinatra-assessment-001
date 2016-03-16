@@ -15,8 +15,9 @@ class UsersController < ApplicationController
 	end
 
 	get '/login' do
-		@error_message = params[:error]
-		binding.pry
+		if !params[:error].nil?
+			@error_message = "Password incorrect. Please try again."
+		end
 		if !session[:user_id]
 			erb :'users/login', layout: false
 		else
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
 			session[:user_id] = user.id
 			redirect to "/users/#{user.id}"
 		else
-			redirect to '/login?error=Password incorrect. Please try again'
+			redirect to '/login?error=True'
 		end
 	end
 

@@ -8,8 +8,12 @@
 	<input type="submit" value="submit">
 </form>
 
+<p>New to San Francisco Neighborhood Guide?<br>
+Sign up <a href='/signup'>here</a></p>
+
 <% if !@error_message.nil? %>
   <div class="alert alert-warning">
+    <br>
     <%= @error_message %>
   </div>
 <% end %> 
