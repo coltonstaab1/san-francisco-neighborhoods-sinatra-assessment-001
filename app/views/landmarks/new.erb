@@ -10,11 +10,19 @@
   <input type="text" name="address"><br>
 
   <label>Landmark Type:</label>
-  <input type="text" name="landmark_type"><br>
+  <select name="landmark_type">
+    <option value="bar">Bar</option>
+    <option value="gym">Gym</option>
+    <option value="movie_theater">Movie Theater</option>
+    <option value="restaurant">Restaurant</option>
+  </select><br>
 
   <label>Neighborhood:</label>
-
-  <input type="hidden" name="created_by" value="<%=@user.id%>">
+  <select name="neighborhood_id">
+    <% @neighborhoods.all.each do |neighborhood| %>
+      <option value=<%= neighborhood.id %><%= neighborhood.name %></option>
+    <% end %>
+  </select><br>
 
   <input type="submit" value="Create">
 
