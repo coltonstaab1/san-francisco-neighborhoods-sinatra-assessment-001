@@ -1,5 +1,5 @@
 <h2>Landmarks:</h2>
 <h3><a href='/landmarks/new'>(create new landmark)</a></h3>
 <% @landmarks.each do |landmark| %>
-  <li><%= landmark.name %></li>
+  <li><a href='/landmarks/<%=landmark.id%>'><%= landmark.name %></a></li>
 <% end %>
