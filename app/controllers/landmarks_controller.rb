@@ -2,6 +2,7 @@ class LandmarksController < ApplicationController
 
   get '/landmarks' do 
     if logged_in?
+      @neighborhoods = Neighborhood.all
       @landmarks = Landmark.all
       erb :'landmarks/index'
     else
