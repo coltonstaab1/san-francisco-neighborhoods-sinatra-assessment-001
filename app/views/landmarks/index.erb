@@ -1,5 +1,12 @@
 <h2>Landmarks:</h2>
 <h3><a href='/landmarks/new'>(create new landmark)</a></h3>
-<% @landmarks.each do |landmark| %>
-  <li><a href='/landmarks/<%=landmark.id%>'><%= landmark.name %></a></li>
+<% @neighborhoods.each do |neighborhood| %>
+  <h4><%= neighborhood.name %></h4>
+  <ul>
+    <% @landmarks.each do |landmark| %>
+      <% if landmark.neighborhood == neighborhood %>
+        <li><%=landmark.name%></li>
+      <% end %>
+    <% end %>
+  </ul>
 <% end %>
