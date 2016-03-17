@@ -4,6 +4,7 @@ class LandmarksController < ApplicationController
     if logged_in?
       @neighborhoods = Neighborhood.all
       @landmarks = Landmark.all
+      @error_message = params[:error]
       erb :'landmarks/index'
     else
       redirect to '/login'
@@ -13,7 +14,7 @@ class LandmarksController < ApplicationController
   get '/landmarks/new' do
     if logged_in?
       @neighborhoods = Neighborhood.all
-      binding.pry
+      @user = User.find(session[:user_id])
       erb :'landmarks/new'
     else
       redirect to '/login'
@@ -23,20 +24,32 @@ class LandmarksController < ApplicationController
   get '/landmarks/:id/edit' do
     redirect_if_not_logged_in
     @landmark = Landmark.find(params[:id])
-    @neighborhoods = Neighborhood.all
-    erb :'landmarks/edit'
+    if @landmark.created_by != session[:user_id]
+      redirect to '/landmarks?error=You cannot edit a landmark you did not create'
+    else
+      @neighborhoods = Neighborhood.all
+      erb :'landmarks/edit'
+    end
   end
 
   post '/landmarks' do
-    @landmark = Landmark.create(name: params[:name], address: params[:address], landmark_type: params[:landmark_type], neighborhood_id: params[:neighborhood_id])
-    redirect '/landmarks'
+    if params[:name] == ""
+      redirect '/landmarks/new?error=Please give this landmark a name'
+    else
+      @landmark = Landmark.create(name: params[:name], address: params[:address], landmark_type: params[:landmark_type], neighborhood_id: params[:neighborhood_id], created_by: params[:created_by])
+      redirect '/landmarks'
+    end
   end
 
   post '/landmarks/:id' do
     @landmark = Landmark.find(params[:id])
-    @landmark.update(name: params[:name], address: params[:address], landmark_type: params[:landmark_type], neighborhood_id: params[:neighborhood_id])
-    binding.pry
-    redirect to "/landmarks/#{@landmark.id}"
+    if params[:name] == ""
+      redirect to '/landmarks/#{@landmark.id}/edit?error=Please give this landmark a name'
+    else
+      @landmark.update(name: params[:name], address: params[:address], landmark_type: params[:landmark_type], neighborhood_id: params[:neighborhood_id])
+      binding.pry
+      redirect to "/landmarks/#{@landmark.id}"
+    end
   end
 
   get '/landmarks/:id' do
