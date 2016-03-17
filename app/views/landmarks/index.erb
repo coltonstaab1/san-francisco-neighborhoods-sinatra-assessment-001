@@ -5,7 +5,7 @@
   <ul>
     <% @landmarks.each do |landmark| %>
       <% if landmark.neighborhood == neighborhood %>
-        <li><%=landmark.name%></li>
+        <li><a href="/landmarks/<%=landmark.id%>"><%=landmark.name%></a></li>
       <% end %>
     <% end %>
   </ul>

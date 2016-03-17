@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311224247) do
+ActiveRecord::Schema.define(version: 20160317233829) do
 
   create_table "landmarks", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "landmark_type"
-    t.string "neighborhood_id"
+    t.string  "name"
+    t.string  "address"
+    t.string  "landmark_type"
+    t.string  "neighborhood_id"
+    t.integer "created_by"
   end
 
   create_table "neighborhoods", force: :cascade do |t|
