@@ -13,6 +13,7 @@ class LandmarksController < ApplicationController
 
   get '/landmarks/new' do
     if logged_in?
+      @error_message = params[:error]
       @neighborhoods = Neighborhood.all
       @user = User.find(session[:user_id])
       erb :'landmarks/new'
@@ -27,6 +28,7 @@ class LandmarksController < ApplicationController
     if @landmark.created_by != session[:user_id]
       redirect to '/landmarks?error=You cannot edit a landmark you did not create'
     else
+      @error_message = params[:error]
       @neighborhoods = Neighborhood.all
       erb :'landmarks/edit'
     end
@@ -47,13 +49,13 @@ class LandmarksController < ApplicationController
       redirect to '/landmarks/#{@landmark.id}/edit?error=Please give this landmark a name'
     else
       @landmark.update(name: params[:name], address: params[:address], landmark_type: params[:landmark_type], neighborhood_id: params[:neighborhood_id])
-      binding.pry
       redirect to "/landmarks/#{@landmark.id}"
     end
   end
 
   get '/landmarks/:id' do
     if logged_in?
+      @user_id = session[:user_id].to_i
       @landmark = Landmark.find(params[:id])
       erb :'landmarks/show'
     else

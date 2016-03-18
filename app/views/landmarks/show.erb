@@ -1,3 +1,6 @@
 <h2><%= "#{@landmark.name} | #{@landmark.landmark_type}" %></h2>
+<% if @user_id == @landmark.created_by%>
+  <a href="/landmarks/<%=@landmark.id%>/edit">(edit)</a>
+<% end %>
 <p>Neighborhood: <a href="/neighborhoods/<%= @landmark.neighborhood.id %>"><%= @landmark.neighborhood.name %></a></p>
 <p><%= "Address: #{@landmark.address}" %></a>
